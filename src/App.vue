@@ -8,11 +8,20 @@
     <h3 v-for="(movie, index) in actor.movies" :key="index">
       {{movie}}
     </h3>
+    <hr/>
   </template>
   <!-- iterate two layer array -->
   <!-- <div> also works -->
-    
+
   <p v-for="(value, key, index) in myInfo" :key="value">{{value}},{{index}}, {{key}}</p>
+  <!-- iterate an object -->
+
+  <template v-for="(name, index) in names" :key="index">
+    <h2 v-if="name === 'clark'">
+      {{name}}
+    </h2>
+  </template>
+  <!-- conditional list rendering -->
 
 </template>
 

@@ -10,7 +10,18 @@
     <h2>display is true</h2>
   </template>
   <!-- invisible wrapper -->
+
+  <h2 v-show="showElement">Using v-show</h2> 
+  <!-- keep the element and set display to nono in DOM -->
+  <!-- more efficient when toggleing -->
+
+  <h2 v-if="showElement">Using v-show</h2> 
+  <!-- remove the element from dom if v-if==false -->
+  <!-- its efficient if condition is unlikely to change -->
+  
 </template>
+
+
  
 <script>
 export default {
@@ -18,7 +29,8 @@ export default {
   data() {
     return{
         num: "eww",
-        display: true
+        display: true,
+        showElement: true
     }
   },
 }

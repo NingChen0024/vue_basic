@@ -1,6 +1,7 @@
 <template>
   <div>{{great}}, {{name}}</div>
   <div v-html='channel'></div>
+  <div v-text='great'></div>
   <div v-html='hack'></div>
   <h2 v-bind:id='headingId'>Heading</h2><!-- adding Id to element with v-bind -->
   <button v-bind:disabled='isDisabled'>disabled with v-bind:disabled</button>
@@ -34,6 +35,11 @@
     Danger Style
   </div>
   <!-- binding array style -->
+
+  <div :style="[baseStyleObj, dangerStyleObj]">
+    short hand
+  </div>
+  <!-- v-bind shorthand -->
 
 </template>
 

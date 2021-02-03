@@ -1,16 +1,20 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>{{great}}, {{name}}</div>
+  <div v-text='channel'></div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
+  data() {
+    return{
+      great: "hello",
+      name: 'ning',
+      channel: 'rarely used'
+    }
+  },
 }
 </script>
 

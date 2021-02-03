@@ -1,24 +1,19 @@
 <template>
-  <h2 v-if="num === 0">the number if Zero</h2>
-  <h2 v-else-if="num < 0">The number is negative</h2>
-  <h2 v-else-if="num > 0">The number is positive</h2>
-  <h2 v-else>Number is {{num}}</h2>
+  <h2 v-for="(name, index) in names" :key='index'>{{index}},{{ name }}</h2>
+  <h2 v-for="(name, index) in fullNames" :key="index">{{index}} {{name.first}},{{name.second}}</h2>
+  <!-- iterate over an array -->
 
-  <template v-if="display"> 
-    <h2>display is true</h2>
-    <h2>display is true</h2>
-    <h2>display is true</h2>
+  <template v-for="(actor, index) in actors" :key="index">
+    <h2>{{actor.name}}</h2>
+    <h3 v-for="(movie, index) in actor.movies" :key="index">
+      {{movie}}
+    </h3>
   </template>
-  <!-- invisible wrapper -->
+  <!-- iterate two layer array -->
+  <!-- <div> also works -->
+    
+  <p v-for="(value, key, index) in myInfo" :key="value">{{value}},{{index}}, {{key}}</p>
 
-  <h2 v-show="showElement">Using v-show</h2> 
-  <!-- keep the element and set display to nono in DOM -->
-  <!-- more efficient when toggleing -->
-
-  <h2 v-if="showElement">Using v-show</h2> 
-  <!-- remove the element from dom if v-if==false -->
-  <!-- its efficient if condition is unlikely to change -->
-  
 </template>
 
 
@@ -28,9 +23,27 @@ export default {
   name: 'App',
   data() {
     return{
-        num: "eww",
-        display: true,
-        showElement: true
+      names:['bruce', 'clark', 'diana'],
+      fullNames:[
+        {first: 'brace', second: 'wayne'},
+        {first: 'clark', second: 'kent'},
+        {first: 'prince', second: 'diana'}
+      ],
+      actors:[
+        {
+          name: "brace",
+          movies: ['batman', 'the prestige']
+        },
+        {
+          name: "Di Caprio",
+          movies: ['titanic', 'inception']
+        }
+      ],
+      myInfo: {
+        name: 'ning',
+        degree: 'IT',
+        age: 23
+      }
     }
   },
 }

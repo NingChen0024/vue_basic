@@ -15,7 +15,30 @@
     new: isNew,
     'sold-out': !isNew
   }">object binding</h2>
+
+  <h2 v-bind:style="{
+    color: highlightColor,
+    fontSize: headerSize + 'px',
+    padding: '20px'
+  }">Inline Style</h2>   <!-- binding inline style -->
+
+  <h2 v-bind:style="headerStyleObj">
+    object Style 
+  </h2>  <!-- binding object style -->
+
+  <div v-bind:style="[baseStyleObj, successStyleObj]">
+    Success Style
+  </div>  
+  
+   <div v-bind:style="[baseStyleObj, dangerStyleObj]">
+    Danger Style
+  </div>
+  <!-- binding array style -->
+
 </template>
+
+
+
 
 <script>
 export default {
@@ -30,7 +53,33 @@ export default {
       isDisabled: true,
       status:'underline',
       isPromoted: true,
-      isNew: true
+      isNew: true,
+      highlightColor:'orange',
+      headerSize: 50,
+
+      headerStyleObj:{
+        color: 'red',
+        fontSize: '50px',
+        padding: '20px'
+      },
+
+      baseStyleObj: {
+        fontSize: '50px',
+        padding: '10px'
+      },
+
+      successStyleObj: {
+        color: 'green',
+        backgroundColor:'lightgreen',
+        border: '1px solid green'
+      },
+
+      dangerStyleObj: {
+        marginTop: '20px',
+        color: 'darked',
+        backgroundColor: 'red',
+        border: '1px solid darked'
+      }
     }
   },
 }

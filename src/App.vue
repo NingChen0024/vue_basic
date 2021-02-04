@@ -1,15 +1,23 @@
 <template>
-  <p>{{formValues.yearsOfExperience}}</p>
-  <form @submit="submitForm">
+  <p>{{formValues.name.length}}</p> 
+  <!-- prevent modifier -->
+  <form @submit.prevent="submitForm">
     <div>
       <label for='name'>Name</label>
-      <input type='text' v-model='formValues.name'/>
+      <input type='text' v-model.trim.lazy='formValues.name'/>
+      <!-- <input @keyup.enter='submitForm' type='text'/> -->
+      <!-- submit after press enter -->
     </div>
 
     <!-- text field -->
     <div>
       <label for='profile'>Profile</label>
       <input type='text' v-model='formValues.profileSummary'/>
+    </div>
+
+    <div>
+      <label for='age'>Age</label>
+      <input type='text' v-model.number='formValues.age'/>
     </div>
 
     <!-- single selection -->
@@ -78,7 +86,7 @@
 
     <!-- submit button -->
     <div>
-      <button>Submit</button>
+      <button @click="submitform">Submit</button>
     </div>
 
 
@@ -99,7 +107,8 @@ export default {
         jobLocation: [],
         remoteWork: 'no',
         skillSet: [],
-        yearsOfExperience: ''
+        yearsOfExperience: '',
+        age: null
       }
     }
   }, 

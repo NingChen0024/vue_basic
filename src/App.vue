@@ -1,5 +1,10 @@
 <template>
-  <p>{{formValues.name.length}}</p> 
+  <p v-once>{{formValues.name.length}}</p> 
+  <!-- v-once render static dom once -->
+
+  <p v-pre>{{formValues.name.length}}</p> 
+  <!-- v-pre not to compile html  -->
+
   <!-- prevent modifier -->
   <form @submit.prevent="submitForm">
     <div>
@@ -109,7 +114,8 @@ export default {
         skillSet: [],
         yearsOfExperience: '',
         age: null
-      }
+      },
+      bonus:'bonus'
     }
   }, 
   methods: {

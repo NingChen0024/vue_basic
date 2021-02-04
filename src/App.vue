@@ -1,8 +1,13 @@
 <template>
-  <h2>{{1 + 2 + 5}}</h2>
-  <h2>{{add(1, 2, "3")}}</h2>
-  <h2>{{multiply(5)}}</h2>
-  <h2>{{multiplyTwo(base)}}</h2>
+  <h2>{{name}}</h2>
+  <button v-on:click="changeName(), increment()">Change Name</button>
+
+  <h2>{{count}}</h2>
+  <button v-on:click="increment">Add</button>
+  <button @click="count = count - 1">Minus</button>
+  <div>
+    <input value=/>
+  </div>
 </template>
 
  
@@ -11,25 +16,24 @@ export default {
   name: 'App',
   data() {
     return{
-      base: 5,
-      baseValue: 10
+      name:'ning',
+      count: 0,
+      inputValue: 0
     }
-  },
-  methods:{
-    add(a, b, c){
-      return a + b + c
+  }, 
+  methods: {
+    increment(){
+      this.count += 1
     },
-    multiply(num){
-      return num * 5
+    decrement(){
+      this.count -= 1
     },
-    multiplyTwo(num){
-      return num * this.baseValue
-      // with this value
+    changeName(){
+      this.name = 'batman'
     }
   }
-
-  // no arrow functions
 }
+
 </script>
 
 <style>

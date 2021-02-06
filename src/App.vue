@@ -8,7 +8,15 @@
   <!-- use v-bind to pass number and bollean -->
 
   <ComponentA/>
-  <p>{{name}}</p>
+
+
+  <template v-if='showPopup'>
+    <Popup @close="closePopup"/> 
+    <!-- call close event once clicked -->
+  </template>
+  <template v-else>
+    <button @click='showPopup = true'>Show popup</button>
+  </template>
 </template>
 
 <script>
@@ -16,17 +24,20 @@ import Great from './components/Great.vue'
 // import sub component
 import Articles from './components/Articles.vue'
 import ComponentA from './components/ComponentA.vue'
+import Popup from './components/Popup.vue'
 
 export default {
   name: 'App',
   components: {
     Great,
     Articles,
-    ComponentA
+    ComponentA,
+    Popup
   }, // informing component
   data() {
     return{
-      name: 'ning'
+      name: 'ning',
+      showPopup: false
     }
   },
   // provide: {
@@ -39,7 +50,12 @@ export default {
   }, // provide values to subcomponents
     // if only pass data down to subcomponents, can use provide object
     // is data needs to be used in current page, create provide as a function returning an object
-  methods: {},
+  methods: {
+    closePopup(name){
+      this.showPopup = false
+      console.log('name', name)
+    } //close popup and log data passed from child component
+  },
   computed:{},
   watch: {}
 }

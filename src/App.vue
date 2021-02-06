@@ -1,25 +1,23 @@
 <template>
-  <h2>fullname - {{firstName}} {{lastName}}</h2>
-  <h2>computed fullname - {{fullName}}</h2>
+ 
+  <h2>volume tracker (0 - 20)</h2>
+  <h3>Current volume {{volume}}</h3>
   <div>
-    <h2>computed total - {{total}}</h2>
-    <button @click="addItem">Add</button>
+    <button @click='volume += 2'>Increase</button>
+    <button @click="volume -= 2">Decrease</button>
   </div>
 
-  <template v-for='item in items' :key='item.id'>
-    <h2 v-if='item.price > 100'>{{item.id}}.{{item.price}}</h2>
-  </template>
-  <!-- original solution -->
+  <input type='text' v-model='movie'/>
+  <div>
+    <p>movie title</p>
+    <input type='text' v-model='movieInfo.title'>
+  </div>
+  <div>
+    <p>movie actor</p>
+    <input type='text' v-model='movieInfo.actor'/>
+  </div>
 
-  <h2 v-for='item in expensiveItems' :key='item.id'>
-    {{item.id}}
-  </h2>
-  <!-- conditional render list of value -->
-  <!-- computed properties with v-for -->
-  <!-- cashed and from the view to recalculate the value -->
-
-  <button @click="changeName">change</button>
-
+  <button @click='movieList.push("bat4")'>push new movie</button>
 </template>
 
 
@@ -30,55 +28,49 @@ export default {
   name: 'App',
   data() {
     return{
-      firstName:'Bruce',
-      lastName:'Wayue',
-      items:[
-        {
-          id: 1,
-          price: 100
-        },
-        {
-          id: 2,
-          price: 200
-        },
-        {
-          id: 3,
-          price: 600
-        }
+      volume: 0,
+      movie: 'batman',
+      movieInfo: {
+        title: '',
+        actor:''
+      },
+      movieList: [
+        'bat',
+        'bat2',
+        'bat3'
       ]
     }
   },
-  methods:{
-    addItem(){
-      this.items.push({id: 4, price: 200})
-      console.log(this.items)
-    },
-    changeName(){
-      this.fullName = 'qqq www'
-    }
-  },
-  computed:{
-    fullName: {
-      get() {
-        return `${this.firstName} ${this.lastName}`
-      },
-      set(value) {
-        const name = value.split(' ')
-        this.firstName =  name[0]
-        this.lastName = name[1]
+  methods: {},
+  computed:{},
+  watch: {
+    volume(newValue, oldValue) {
+      if (oldValue < newValue && newValue === 16){
+        alert('volume is too high')
       }
-      // set computed properties with setter
     },
-    total(){
-      return this.items.reduce((total, curr) => (total = total + curr.price), 0)
+    movie: {
+      handler(newValue){
+        console.log(`calling api=${newValue}`)
+      },
+      immediate: true
+      // handler will run after the page is loaded
     },
-    expensiveItems(){
-      return this.items.filter(item => item.price > 100 )
-    }
-
-    // computed properties are cashed
-    // once an independent property is changed
-    // the computed result will not be recalculated
+    movieInfo: {
+      handler(newValue){
+        console.log(`movie title: ${newValue.title}, movie actor: ${newValue.actor}`)
+      },
+      deep: true
+      // watch deep nested properties
+    },
+    movieList: {
+      handler(){
+        console.log(this.movieList)
+      },
+      deep: true
+    } 
+    // adding item doesn't change the reference of the array,so need deep
+    // watch array with deep
   }
 }
 

@@ -1,6 +1,9 @@
 <template>
   <div v-if="isPublic">
-    <h2>{{title}}, likes - {{likes + 1}}, is public - {{isPublic ? 'yes' : 'NO'}}</h2>
+    <h2 v-bind='$attrs'>{{title}}</h2> 
+    <!-- add non prop attributes with v-bind -->
+    <h2>likes - {{likes + 1}}</h2>
+    <h2>is public - {{isPublic ? 'yes' : 'NO'}}</h2>
   </div>
 </template>
 
@@ -15,7 +18,8 @@
        }, // set required attribute and add default value
        likes: Number,
        isPublic: Boolean
-    }// use objects to specify the type of props
+    },// use objects to specify the type of props
+    inheritAttrs: false // remove inheriated attrs on the root div element
   }
 </script>
 

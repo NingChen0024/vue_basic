@@ -4,7 +4,7 @@
   <Great :name='name'/>
   <!-- dynamic props -->
 
-  <Articles title='article title' :likes='30' :isPublic="true"/>
+  <Articles id='my-article' title='article title' :likes='30' :isPublic="true"/>
   <!-- use v-bind to pass number and bollean -->
 
 

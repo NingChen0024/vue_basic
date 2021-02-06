@@ -1,6 +1,6 @@
 <template>
   <h2>fullname - {{firstName}} {{lastName}}</h2>
-  <h2>computed fullname - {{fullname}}</h2>
+  <h2>computed fullname - {{fullName}}</h2>
   <div>
     <h2>computed total - {{total}}</h2>
     <button @click="addItem">Add</button>
@@ -17,6 +17,8 @@
   <!-- conditional render list of value -->
   <!-- computed properties with v-for -->
   <!-- cashed and from the view to recalculate the value -->
+
+  <button @click="changeName">change</button>
 
 </template>
 
@@ -50,11 +52,22 @@ export default {
     addItem(){
       this.items.push({id: 4, price: 200})
       console.log(this.items)
+    },
+    changeName(){
+      this.fullName = 'qqq www'
     }
   },
   computed:{
-    fullname(){
-      return `${this.firstName} ${this.lastName}`
+    fullName: {
+      get() {
+        return `${this.firstName} ${this.lastName}`
+      },
+      set(value) {
+        const name = value.split(' ')
+        this.firstName =  name[0]
+        this.lastName = name[1]
+      }
+      // set computed properties with setter
     },
     total(){
       return this.items.reduce((total, curr) => (total = total + curr.price), 0)

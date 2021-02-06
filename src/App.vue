@@ -5,7 +5,22 @@
     <h2>computed total - {{total}}</h2>
     <button @click="addItem">Add</button>
   </div>
+
+  <template v-for='item in items' :key='item.id'>
+    <h2 v-if='item.price > 100'>{{item.id}}.{{item.price}}</h2>
+  </template>
+  <!-- original solution -->
+
+  <h2 v-for='item in expensiveItems' :key='item.id'>
+    {{item.id}}
+  </h2>
+  <!-- conditional render list of value -->
+  <!-- computed properties with v-for -->
+  <!-- cashed and from the view to recalculate the value -->
+
 </template>
+
+
 
  
 <script>
@@ -18,7 +33,7 @@ export default {
       items:[
         {
           id: 1,
-          price: 200
+          price: 100
         },
         {
           id: 2,
@@ -43,6 +58,9 @@ export default {
     },
     total(){
       return this.items.reduce((total, curr) => (total = total + curr.price), 0)
+    },
+    expensiveItems(){
+      return this.items.filter(item => item.price > 100 )
     }
 
     // computed properties are cashed

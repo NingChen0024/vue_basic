@@ -1,63 +1,20 @@
 <template>
-  <Great name='ning' heroName='batman'/> 
-  <!-- static props -->
-  <Great :name='name'/>
-  <!-- dynamic props -->
-
-  <Articles id='my-article' title='article title' :likes='30' :isPublic="true"/>
-  <!-- use v-bind to pass number and bollean -->
-
-  <ComponentA/>
-
-
-  <template v-if='showPopup'>
-    <Popup @close="closePopup"/> 
-    <!-- call close event once clicked -->
-  </template>
-  <template v-else>
-    <button @click='showPopup = true'>Show popup</button>
-  </template>
+  <Input type='text' v-model='name'/>
+  <!-- v-model bind with customized components -->
 </template>
 
 <script>
-import Great from './components/Great.vue'
-// import sub component
-import Articles from './components/Articles.vue'
-import ComponentA from './components/ComponentA.vue'
-import Popup from './components/Popup.vue'
-
+import Input from './components/Input'
 export default {
   name: 'App',
   components: {
-    Great,
-    Articles,
-    ComponentA,
-    Popup
-  }, // informing component
+    Input
+  },
   data() {
     return{
-      name: 'ning',
-      showPopup: false
+      name: ''
     }
-  },
-  // provide: {
-  //   username: 'nameTwo'
-  // },
-  provide() {
-    return {
-      userName: this.name
-    }
-  }, // provide values to subcomponents
-    // if only pass data down to subcomponents, can use provide object
-    // is data needs to be used in current page, create provide as a function returning an object
-  methods: {
-    closePopup(name){
-      this.showPopup = false
-      console.log('name', name)
-    } //close popup and log data passed from child component
-  },
-  computed:{},
-  watch: {}
+  }
 }
 
 </script>
